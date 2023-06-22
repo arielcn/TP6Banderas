@@ -6,6 +6,7 @@ function App() {
   const [paises, setPaises] = useState([]);
   const [nombre, setNombre] = useState('');
   const [pais, setPais] = useState({});
+  const [puntos, setPuntos] = useState(0);
 
   useEffect(() => {
     axios.get('https://countriesnow.space/api/v0.1/countries/flag/images')
@@ -22,6 +23,12 @@ function App() {
     if (nombre === pais.name) {
       console.log("very good")
       {skipPais()};
+      setPuntos(puntos +10);
+    }else{
+      setPuntos(puntos -1)
+      if (puntos <= 0) {
+        setPuntos(puntos)
+      }
     }
   }
 
@@ -32,8 +39,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{pais.name}</h1>
-      <img width='40%' src={pais.flag} />
+      <h1>{puntos}</h1>
+      <img width='40%' height='400px' src={pais.flag} />
       <form onSubmit={validarName}>
         <input onKeyUp={(e) => setNombre(e.target.value)} placeholder='nombre del pais' />
         <button type='submit'>Verificar</button>
