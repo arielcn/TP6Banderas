@@ -20,12 +20,12 @@ function App() {
 
   const validarName = (e) => {
     e.preventDefault();
-    if (nombre === pais.name) {
+    if (nombre.toLowerCase() === pais.name.toLowerCase()) {
       console.log("very good")
-      {skipPais()};
-      setPuntos(puntos +10);
-    }else{
-      setPuntos(puntos -1)
+      { skipPais() };
+      setPuntos(puntos + 10);
+    } else {
+      setPuntos(puntos - 1)
       if (puntos <= 0) {
         setPuntos(puntos)
       }
@@ -37,12 +37,15 @@ function App() {
     setPais(paisRandom);
   }
 
+
   return (
-    <div className="App">
+    <div className="App-header">
       <h1>{puntos}</h1>
-      <img width='40%' height='400px' src={pais.flag} />
+      <img className='bandera' width='30%' src={pais.flag} />
       <form onSubmit={validarName}>
-        <input onKeyUp={(e) => setNombre(e.target.value)} placeholder='nombre del pais' />
+        <div class="input-group mb-3">
+          <input onKeyUp={(e) => setNombre(e.target.value)} type='text' className='form-control' aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre del pais' />
+        </div>
         <button type='submit'>Verificar</button>
         <button onClick={skipPais}>Skip</button>
       </form>
